@@ -31,7 +31,7 @@ function maxFun(board, depth) {
 
   var boards = board.generateNewBoardsBlacksTurn();
   if (depth == 0) {
-    //////print(boards);
+    //print(boards);
   }
   var topBoardNo = 0;
   var topScore = -100000;
@@ -44,7 +44,7 @@ function maxFun(board, depth) {
   }
 
   if (depth == 0) {
-    ////print(topScore);
+    //print(topScore);
     return boards[topBoardNo];
   }
   return topScore;
@@ -107,15 +107,19 @@ function minFunAB(board, alpha, beta, depth) {
   }
 
   if (depth == 0) {
-    ////print(lowestScore);
-    ////print("bruh");
+    //print(lowestScore);
+    //print("bruh");
     return boards[lowestBoardNo];
   }
-  ////print("poop");
-  ////print(lowestScore);
+  //print("poop");
+  //print(lowestScore);
   return lowestScore;
 }
-//---------------------------------------------------------------------------------------
+
+
+
+
+
 function maxFunAB(board, alpha, beta, depth) {
   if (depth >= maxDepth) {
     board.setScore();
@@ -142,7 +146,7 @@ function maxFunAB(board, alpha, beta, depth) {
 
   var boards = board.generateNewBoardsBlacksTurn();
   if (depth == 0) {
-    //////print(boards);
+    //print(boards);
   }
   var topBoardNo = 0;
   var topScore = -300;
@@ -169,7 +173,7 @@ function maxFunAB(board, alpha, beta, depth) {
   }
 
   if (depth == 0) {
-    ////print(topScore);
+    //print(topScore);
     return boards[topBoardNo];
   }
   return topScore;
