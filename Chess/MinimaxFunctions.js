@@ -1,7 +1,7 @@
 var maxDepth = 3;
 
 
-function minFun(board, depth) {
+function min(board, depth) {
   if (depth >= maxDepth) {
     board.setScore();
     return board.score;
@@ -12,7 +12,7 @@ function minFun(board, depth) {
   var lowestScore = 100000;
   for (var i = 0; i < boards.length; i++) {
     if (!boards[i].isDead()) {
-      var score = maxFun(boards[i], depth + 1);
+      var score = max(boards[i], depth + 1);
       if (score < lowestScore) {
         lowestBoardNo = i;
         lowestScore = score;
@@ -22,7 +22,7 @@ function minFun(board, depth) {
   return lowestScore;
 }
 
-function maxFun(board, depth) {
+function max(board, depth) {
   if (depth >= maxDepth) {
     board.setScore();
     return board.score;
@@ -51,7 +51,7 @@ function maxFun(board, depth) {
 }
 
 
-function minFunAB(board, alpha, beta, depth) {
+function minAB(board, alpha, beta, depth) {
   if (depth >= maxDepth) {
     board.setScore();
     return board.score;
@@ -82,7 +82,7 @@ function minFunAB(board, alpha, beta, depth) {
   var lowestScore = 300;
   for (var i = 0; i < boards.length; i++) {
 
-    var score = maxFunAB(boards[i], alpha, beta, depth + 1);
+    var score = maxAB(boards[i], alpha, beta, depth + 1);
     if (depth == 0) {
       //print(score, i, boards[i]);
     }
@@ -152,7 +152,7 @@ function maxFunAB(board, alpha, beta, depth) {
   var topScore = -300;
   for (var i = 0; i < boards.length; i++) {
 
-    var score = minFunAB(boards[i], alpha, beta, depth + 1);
+    var score = minAB(boards[i], alpha, beta, depth + 1);
     if (score > topScore) {
       topBoardNo = i;
       topScore = score;
