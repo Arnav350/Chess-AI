@@ -117,7 +117,7 @@ class King extends Piece {
     } else {
       this.pic = images[6];
     }
-    this.value = 99;
+    this.value = 999;
   }
 
   clone() {
