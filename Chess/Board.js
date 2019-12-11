@@ -1,5 +1,7 @@
+// Board Class
 class Board {
 
+	// Constructor method
 	constructor() {
 
 		This.whitePieces = [];
@@ -11,7 +13,8 @@ class Board {
 		this.setupPieces();
 
 	}
-
+	
+	// Chess Piece Locations
 	setupPieces() {
 
 		// White Sprites
@@ -69,6 +72,7 @@ class Board {
 
 	}
 
+	// To check if a piece is at (x, y) location
 	isPieceAt(x, y) {
 
 		for (var i = 0; i < this.whitePieces.length; i++) {
@@ -95,6 +99,7 @@ class Board {
 
 	}
 	
+	// Place piece
 	getPieceAt(x, y) {
 
 		for (var i = 0; i < this.whitePieces.length; i++) {
@@ -121,6 +126,7 @@ class Board {
 
 	}
 		
+	// New board - White
 	generateNewBoardsWhitesTurn() {
 	
 		var boards = [];
@@ -145,6 +151,7 @@ class Board {
 	  
 	}
 	
+	// New board - Black
 	generateNewBoardsBlacksTurn() {
 	
 		var boards = [];
@@ -168,7 +175,8 @@ class Board {
 		return boards;
 	  
 	}
-
+	
+	// Score
 	setScore() {		
 		
 		this.score = 0;
@@ -195,6 +203,7 @@ class Board {
 
 	}
 
+	// Move piece
 	move(from, to) {
 	
 		var pieceToMove = this.getPieceAt(from.x, from.y);
@@ -208,7 +217,8 @@ class Board {
 		pieceToMove.move(to.x, to.y, this);
 		
 	}
-
+	
+	// Clone
 	clone() {
 	
 		var clone = new Board();
@@ -229,11 +239,14 @@ class Board {
 	  
 	}
 
+	// Game Ended
 	isDone() {
 	
 		return this.whitePieces[0].taken || this.blackPieces[0].taken;
+	
 	}
 	
+	// Dead
 	isDead() {
 	
 		if (whiteAI && whitesMove) {
@@ -252,6 +265,7 @@ class Board {
 	 
 	}
 	
+	// Someone has won
 	hasWon() {
 	
 		if (whiteAI && whitesMove) {
