@@ -1,304 +1,225 @@
-
 var maxDepth = 3;
-
 
 function min(board, depth) {
 
-  if (depth >= maxDepth) {
-  
-    board.setScore();
+ 	if (depth >= maxDepth) {
+  	
+    	board.setScore();
     
-    return board.score;
+    	return board.score;
   
-  }
+	}
 
-  var boards = board.generateNewBoardsWhitesTurn();
+  	var boards = board.generateNewBoardsWhitesTurn();
   
-  var lowestBoardNo = 0;
+  	var lowestBoardNo = 0;
   
-  var lowestScore = 100000;
+  	var lowestScore = 100000;
   
-  for (var i = 0; i < boards.length; i++) {
+  	for (var i = 0; i < boards.length; i++) {
   
-    if (!boards[i].isDead()) {
+    	if (!boards[i].isDead()) {
     
-      var score = max(boards[i], depth + 1);
+      		var score = max(boards[i], depth + 1);
       
-      if (score < lowestScore) {
+      		if (score < lowestScore) {
       
-        lowestBoardNo = i;
+        		lowestBoardNo = i;
         
-        lowestScore = score;
+        		lowestScore = score;
       
-      }
+      		}
     
-    }
+    	}
   
-  }
+  	}
   
-  return lowestScore;
+  	return lowestScore;
 
 }
 
 function max(board, depth) {
 
-  if (depth >= maxDepth) {
+	if (depth >= maxDepth) {
   
-    board.setScore();
+    	board.setScore();
     
-    return board.score;
+    	return board.score;
   
-  }
+  	}
 
-  var boards = board.generateNewBoardsBlacksTurn();
+  	var boards = board.generateNewBoardsBlacksTurn();
+  
+  	var topBoardNo = 0;
+  
+  	var topScore = -100000;
+  
+	for (var i = 0; i < boards.length; i++) {
 
-  if (depth == 0) {
-  
-    //print(boards);
-  }
-  
-  var topBoardNo = 0;
-  
-  var topScore = -100000;
-  
-  for (var i = 0; i < boards.length; i++) {
-  
-    var score = minFun(boards[i], depth + 1);
+    	var score = minFun(boards[i], depth + 1);
     
-    if (score > topScore) {
+    	if (score > topScore) {
     
-      topBoardNo = i;
+      		topBoardNo = i;
       
-      topScore = score;
+      		topScore = score;
     
-    }
+    	}
     
-  }
+  	}
 
-  if (depth == 0) {
+  	if (depth == 0)
+    	return boards[topBoardNo];
   
-    //print(topScore);
-    
-    return boards[topBoardNo];
-  
-  }
-  
-  return topScore;
+  	return topScore;
 
 }
 
 function minAB(board, alpha, beta, depth) {
 
-  if (depth >= maxDepth) {
+  	if (depth >= maxDepth) {
   
-    board.setScore();
+    	board.setScore();
   
-    return board.score;
+    	return board.score;
   
-  }
+  	}
   
-  if (board.isDead()) {
+  	if (board.isDead()) {
   
-    if (whiteAI && whitesMove) {
+    	if (whiteAI && whitesMove)
+    		return 200;
     
-      return 200;
-    
-    }
-    
-    if (blackAI && !whitesMove) {
-    
-      return -200;
-    
-    }
+    	if (blackAI && !whitesMove)
+    		return -200;
   
-  }
+  	}
   
-  if (board.hasWon()) {
+  	if (board.hasWon()) {
 
-    if (whiteAI && whitesMove) {
+    	if (whiteAI && whitesMove)
+    		return -200;
     
-      return -200;
-    
-    }
-    
-    if (blackAI && !whitesMove) {
-    
-      return 200;
-    
-    }
+    	if (blackAI && !whitesMove)
+   			return 200;
   
-  }
+  	}
 
-  var boards = board.generateNewBoardsWhitesTurn();
+  	var boards = board.generateNewBoardsWhitesTurn();
   
-  var lowestBoardNo = 0;
+  	var lowestBoardNo = 0;
   
-  var lowestScore = 300;
+  	var lowestScore = 300;
   
-  for (var i = 0; i < boards.length; i++) {
+  	for (var i = 0; i < boards.length; i++) {
 
-    var score = maxAB(boards[i], alpha, beta, depth + 1);
+    	var score = maxAB(boards[i], alpha, beta, depth + 1);
     
-    if (depth == 0) {
+    	if (score < lowestScore) {
     
-      //print(score, i, boards[i]);
-    
-    }
-    
-    if (score < lowestScore) {
-    
-      lowestBoardNo = i;
+      		lowestBoardNo = i;
       
-      lowestScore = score;
+      		lowestScore = score;
     
-    } else {
+    	} else {
     
-      if (depth == 0 && score == lowestScore) {
-      
-        //print("same as so i do what i want", i);
+      		if (depth == 0 && score == lowestScore) {
         
-        if (random(1) < 0.3) {
+        		if (random(1) < 0.3)
+       				lowestBoardNo = i;
         
-          lowestBoardNo = i;
-        
-        }
-      
-      }
+      		}
+   
+		}
     
-    }
+    	if (score < alpha)
+    		return lowestScore;
     
-    if (score < alpha) {
-    
-      return lowestScore;
-    
-    }
-    
-    if (score < beta) {
-    
-      beta = score;
-    
-    }
+    	if (score < beta)
+    		beta = score;
 
-  }
+  	}
 
-  if (depth == 0) {
-    
-    //print(lowestScore);
-    
-    //print("bruh");
-    
-    return boards[lowestBoardNo];
-  
-  }
-  
-  //print("poop");
-  
-  //print(lowestScore);
-  
-  return lowestScore;
+  	if (depth == 0)
+   		return boards[lowestBoardNo];
+
+  	return lowestScore;
 
 }
 
 function maxFunAB(board, alpha, beta, depth) {
 
-  if (depth >= maxDepth) {
+  	if (depth >= maxDepth) {
   
-    board.setScore();
+    	board.setScore();
     
-    return board.score;
+    	return board.score;
   
-  }
+  	}
 
-  if (board.isDead()) {
+  	if (board.isDead()) {
   
-    if (whiteAI && whitesMove) {
+    	if (whiteAI && whitesMove)
+    		return 200;
     
-      return 200;
+    	if (blackAI && !whitesMove)
+    		return -200;
+  
+  	}
+
+  	if (board.hasWon()) {
+  
+    	if (whiteAI && whitesMove)
+   			return -200;
     
     }
     
-    if (blackAI && !whitesMove) {
-    
-      return -200;
-    
-    }
-  
-  }
+    if (blackAI && !whitesMove)
+    	return 200;
+ 
+}
 
-  if (board.hasWon()) {
+var boards = board.generateNewBoardsBlacksTurn();
+ 
+  	var topBoardNo = 0;
   
-    if (whiteAI && whitesMove) {
-    
-      return -200;
-    
-    }
-    
-    if (blackAI && !whitesMove) {
-    
-      return 200;
-    
-    }
+  	var topScore = -300;
   
-  }
+  	for (var i = 0; i < boards.length; i++) {
 
-  var boards = board.generateNewBoardsBlacksTurn();
-  
-  if (depth == 0) {
-  
-    //print(boards);
-  
-  }
-  
-  var topBoardNo = 0;
-  
-  var topScore = -300;
-  
-  for (var i = 0; i < boards.length; i++) {
-
-    var score = minAB(boards[i], alpha, beta, depth + 1);
+    	var score = minAB(boards[i], alpha, beta, depth + 1);
     
-    if (score > topScore) {
+    	if (score > topScore) {
     
-      topBoardNo = i;
+      		topBoardNo = i;
       
-      topScore = score;
+     	 	topScore = score;
     
-    } else {
+    	} else {
     
-      if (depth == 0 && score == topScore) {
+      		if (depth == 0 && score == topScore) {
       
-        if (random(1) < 0.3) {
-        
-          topBoardNo = i;
-        
-        }
+        		if (random(1) < 0.3)
+       				topBoardNo = i;
       
-      }
+			}
     
-    }
+		}
    
-    if (score > beta) {
+    	if (score > beta)
+    		return topScore;
     
-      return topScore;
-    
-    }
-    
-    if (score > alpha) {
-    
-      alpha = score;
-    
-    }
+    	if (score > alpha)
+    		alpha = score;
+	
+	}
 
-  }
-
-  if (depth == 0) {
+  	if (depth == 0) {
     
-    //print(topScore);
-    
-    return boards[topBoardNo];
+    	return boards[topBoardNo];
   
-  }
+	}
   
-  return topScore;
+  	return topScore;
 
 }
