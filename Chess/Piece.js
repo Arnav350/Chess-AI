@@ -1,8 +1,9 @@
 class Piece {
-  constructor(x, y, isWhite, letter, pic) {
+  
+  constructor(x, y, isWhite, letter, pic) 
+  
     this.matrixPosition = createVector(x, y);
-    this.pixelPosition = createVector(x * tileSize + tileSize / 2, y *
-      tileSize + tileSize / 2);
+    this.pixelPosition = createVector(x * tileSize + tileSize / 2, y * tileSize + tileSize / 2);
 
     this.taken = false;
     this.white = isWhite;
@@ -108,7 +109,9 @@ class Piece {
 }
 
 class King extends Piece {
+  
   constructor(x, y, isWhite) {
+    
     super(x, y, isWhite);
     this.letter = "K";
     if (isWhite) {
