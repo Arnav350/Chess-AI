@@ -4,7 +4,7 @@ class Board {
 	// Constructor method
 	constructor() {
 
-		This.whitePieces = [];
+		this.whitePieces = [];
 
 		this.blackPieces = [];
 
@@ -58,17 +58,11 @@ class Board {
 	// Show the Pieces
 	show() {
 
-		for (var i = 0; i < this.whitePieces.length; i++) {
-
+		for (var i = 0; i < this.whitePieces.length; i++)
 			this.whitePieces[i].show();
 
-		}
-
 		for (var i = 0; i < this.blackPieces.length; i++) {
-
 			this.blackPieces[i].show();
-
-		}
 
 	}
 
@@ -77,21 +71,15 @@ class Board {
 
 		for (var i = 0; i < this.whitePieces.length; i++) {
 
-			if (!this.whitePieces[i].taken && this.whitePieces[i].matrixPosition.x == x && this.whitePieces[i].matrixPosition.y == y) {
-
+			if (!this.whitePieces[i].taken && this.whitePieces[i].matrixPosition.x == x && this.whitePieces[i].matrixPosition.y == y)
 				return true;
-			
-			}
 
 		}
 
 		for (var i = 0; i < this.blackPieces.length; i++) {
 
 			if (!this.blackPieces[i].taken && this.blackPieces[i].matrixPosition.x == x && this.blackPieces[i].matrixPosition.y == y) {
-
 				return true;
-			
-			}
 
 		}
 
@@ -105,21 +93,15 @@ class Board {
 		for (var i = 0; i < this.whitePieces.length; i++) {
 
 			if (!this.whitePieces[i].taken && this.whitePieces[i].matrixPosition.x == x && this.whitePieces[i].matrixPosition.y == y) {
-
 				return this.whitePieces[i];
-
-			}
 
 		}
 
 		for (var i = 0; i < this.blackPieces.length; i++) {
 
-			if (!this.blackPieces[i].taken && this.blackPieces[i].matrixPosition.x == x && this.blackPieces[i].matrixPosition.y == y) {
-
+			if (!this.blackPieces[i].taken && this.blackPieces[i].matrixPosition.x == x && this.blackPieces[i].matrixPosition.y == y)
 				return this.blackPieces[i];
-
-		  	}
-
+			
 		}
 
 		return null;
@@ -137,12 +119,9 @@ class Board {
 			
 				var tempArr = this.whitePieces[i].generateNewBoards(this);
 			
-				for (var j = 0; j < tempArr.length; j++) {
-			  
-					b0ards.push(tempArr[j]);
-			
-				}
-		  
+				for (var j = 0; j < tempArr.length; j++)
+			  		boards.push(tempArr[j]);
+					
 			}
 		
 		}
@@ -162,11 +141,8 @@ class Board {
 			
 				var tempArr = this.blackPieces[i].generateNewBoards(this);
 			
-				for (var j = 0; j < tempArr.length; j++) {
-			  
-					boards.push(tempArr[j]);
-			
-				}
+				for (var j = 0; j < tempArr.length; j++)
+			  		boards.push(tempArr[j]);
 		  
 			}
 		
@@ -183,21 +159,15 @@ class Board {
 		
 		for (var i = 0; i < this.whitePieces.length; i++) {
 		
-			if (!this.whitePieces[i].taken) {
-			
+			if (!this.whitePieces[i].taken)
 				this.score -= this.whitePieces[i].value;
-		  
-			}
 		
 		}
 		
 		for (var i = 0; i < this.blackPieces.length; i++) {
 		
-			if (!this.blackPieces[i].taken) {
-			
+			if (!this.blackPieces[i].taken)
 				this.score += this.blackPieces[i].value;
-		 
-			}
 		
 		}
 
@@ -208,11 +178,8 @@ class Board {
 	
 		var pieceToMove = this.getPieceAt(from.x, from.y);
 		
-		if (pieceToMove == null) {
-		  
+		if (pieceToMove == null)
 			return;
-		
-		}
 		
 		pieceToMove.move(to.x, to.y, this);
 		
@@ -223,43 +190,28 @@ class Board {
 	
 		var clone = new Board();
 		
-		for (var i = 0; i < this.whitePieces.length; i++) {
-		
+		for (var i = 0; i < this.whitePieces.length; i++)
 			clone.whitePieces[i] = this.whitePieces[i].clone();
 		
-		}
-		
-		for (var i = 0; i < this.blackPieces.length; i++) {
-		
+		for (var i = 0; i < this.blackPieces.length; i++)
 			clone.blackPieces[i] = this.blackPieces[i].clone();
-		
-		}
 		
 		return clone;
 	  
 	}
 
 	// Game Ended
-	isDone() {
-	
+	isDone()
 		return this.whitePieces[0].taken || this.blackPieces[0].taken;
-	
-	}
 	
 	// Dead
 	isDead() {
 	
-		if (whiteAI && whitesMove) {
-		
+		if (whiteAI && whitesMove)
 			return this.whitePieces[0].taken;
 		
-		}
-		
-		if (blackAI && !whitesMove) {
-		
+		if (blackAI && !whitesMove)
 			return this.blackPieces[0].taken;
-		
-		}
 
 		return false;
 	 
@@ -268,17 +220,11 @@ class Board {
 	// Someone has won
 	hasWon() {
 	
-		if (whiteAI && whitesMove) {
-		
+		if (whiteAI && whitesMove)
 			return this.blackPieces[0].taken;
 		
-		}
-		
-		if (blackAI && !whitesMove) {
-		
+		if (blackAI && !whitesMove)
 			return this.whitePieces[0].taken;
-		
-		}
 
 		return false;
 	  
