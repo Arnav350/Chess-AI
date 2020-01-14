@@ -61,7 +61,7 @@ class Board {
 		for (var i = 0; i < this.whitePieces.length; i++)
 			this.whitePieces[i].show();
 
-		for (var i = 0; i < this.blackPieces.length; i++) {
+		for (var i = 0; i < this.blackPieces.length; i++)
 			this.blackPieces[i].show();
 
 	}
