@@ -366,10 +366,10 @@ function($) {
             }
         });
     }
-})(jQuery);    
+})(jquery);    
 
 function log(x) {
-    jQuery("#log").append("<div>" + x + "</div>");
+    jquery("#log").append("<div>" + x + "</div>");
 }
 
   
