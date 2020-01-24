@@ -297,87 +297,87 @@ function displayLoading(bool) {
   }
 }
 
-function($) {
+// function($) {
 
-    var isIE = false;
+//     var isIE = false;
   
 
     
-    var events = [
-        "keyup", false,
-        "blur", false,
-        "focus", false,
-        "drop", true,
-        "change", false,
-        "input", false,
-        "textInput", false,
-        "paste", true,
-        "cut", true,
-        "copy", true,
-        "contextmenu", true
-    ];
+//     var events = [
+//         "keyup", false,
+//         "blur", false,
+//         "focus", false,
+//         "drop", true,
+//         "change", false,
+//         "input", false,
+//         "textInput", false,
+//         "paste", true,
+//         "cut", true,
+//         "copy", true,
+//         "contextmenu", true
+//     ];
    
-    if (!isIE) {
-        var el = document.createElement("input");
-        var gotInput = ("oninput" in el);
-        if  (!gotInput) {
-            el.setAttribute("oninput", 'return;');
-            gotInput = typeof el["oninput"] == 'function';
-        }
-        el = null;
+//     if (!isIE) {
+//         var el = document.createElement("input");
+//         var gotInput = ("oninput" in el);
+//         if  (!gotInput) {
+//             el.setAttribute("oninput", 'return;');
+//             gotInput = typeof el["oninput"] == 'function';
+//         }
+//         el = null;
        
-        if (gotInput) {
-            events = [
-                "input", false,
-                "textInput", false
-            ];
-        }
-    }
+//         if (gotInput) {
+//             events = [
+//                 "input", false,
+//                 "textInput", false
+//             ];
+//         }
+//     }
 
-    $.fn.userChange = function(fn, data) {
-        function checkNotify(e, delay) {
-            // debugging code
-            if ($("#logAll").prop("checked")) {
-                log('checkNotify - ' + e.type);
-            }
+//     $.fn.userChange = function(fn, data) {
+//         function checkNotify(e, delay) {
+//             // debugging code
+//             if ($("#logAll").prop("checked")) {
+//                 log('checkNotify - ' + e.type);
+//             }
 
-            var self = this;
-            var this$ = $(this);
+//             var self = this;
+//             var this$ = $(this);
 
-            if (this.value !== this$.data("priorValue")) {
-                this$.data("priorValue", this.value);
-                fn.call(this, e, data);
-            } else if (delay) {
+//             if (this.value !== this$.data("priorValue")) {
+//                 this$.data("priorValue", this.value);
+//                 fn.call(this, e, data);
+//             } else if (delay) {
                 
-                var eCopy = $.extend({}, e);
-                setTimeout(function() {checkNotify.call(self, eCopy, false)}, 1);
-            }
-        }
+//                 var eCopy = $.extend({}, e);
+//                 setTimeout(function() {checkNotify.call(self, eCopy, false)}, 1);
+//             }
+//         }
 
       
-        this.each(function() {
-            var this$ = $(this).data("priorValue", this.value);
-            for (var i = 0; i < events.length; i+=2) {
-                (function(i) {
-                    this$.on(events[i], function(e) {
-                        checkNotify.call(this, e, events[i+1]);
-                    });
-                })(i);
-            }
-        });
-    }
-})(jQuery);    
+//         this.each(function() {
+//             var this$ = $(this).data("priorValue", this.value);
+//             for (var i = 0; i < events.length; i+=2) {
+//                 (function(i) {
+//                     this$.on(events[i], function(e) {
+//                         checkNotify.call(this, e, events[i+1]);
+//                     });
+//                 })(i);
+//             }
+//         });
+//     }
+// })(jQuery);    
 
-function log(x) {
-    jQuery("#log").append("<div>" + x + "</div>");
-}
+// function log(x) {
+//     jQuery("#log").append("<div>" + x + "</div>");
+// }
 
   
-$("#clear").click(function() {
-    $("#log").html("");
-});
+// $("#clear").click(function() {
+//     $("#log").html("");
+// });
 
 
-$("#container input").userChange(function(e) {
-    log("change - " + e.type + " (" + this.value + ")");
-});
+// $("#container input").userChange(function(e) {
+//     log("change - " + e.type + " (" + this.value + ")");
+// });
